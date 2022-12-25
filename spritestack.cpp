@@ -19,8 +19,11 @@ void Engine::spritestack(Sprite (&slice)[])
 
 	for(int i = 0; i < sliceNumber; i++)
 	{
-		slice[i].setTexture(m_Texture);
-		slice[i].setTextureRect(sf::IntRect(0, yAxis, sliceWidth, sliceHeight));
+		slice[i].setTexture(m_Texture); // We'll first try by implementing an array of sprite instead of creating a new sprite. It be easier, but less efficient in term of memory usage and performance. To research
+		slice[i].setTextureRect(sf::IntRect(0, yAxis, sliceWidth, sliceHeight)); // Here, part of the magic operate : we're slicing the .png file and get each sprite to have a slice. Now the rest of the magic is to offset the vertical position of each sprites of the array.
 		yAxis += sliceHeight;
+
+		// Now the magic trick to offset the position. We'll try this
+		slice[i].setPosition(slice[i].getPosition().x, (slice[i].getPosition().y - i));
 	}
 }
