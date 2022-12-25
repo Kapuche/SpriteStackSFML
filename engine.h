@@ -13,6 +13,7 @@ private:
 	float dtAsSeconds;
 
 	Texture m_Texture;
+	Sprite m_Sprite[16];
 
 	View m_MainView;
 	Vector2f m_Resolution;
@@ -26,7 +27,7 @@ private:
 public:
 	Engine();
 	void run();
-	void spritestack();
+	void spritestack(Sprite (&slice)[]);
 };
 
 #endif
