@@ -3,19 +3,19 @@
 /*** CREATED BY GEIGER ALEXIS ***
  *** devcomm 1 : the number of slice, the width and the height of the slice ***
  *** must be declared manually for now ***/
+/*** devcomm 2 : 2 for loops implemented, one for texturing and setting the position of the spritestack, the second to get the rotation. ***
+ *** use of a sprite array. Might not be the best. Research to be made. ***
+ *** Ready to test. ***/
 
 void Engine::spritestack(Sprite (&slice)[])
 {
 	m_Texture.loadFromFile("Graphics/Hunter.png"); // Here to use graphics in your depository 
 	int sliceNumber = 16; // Manually putting the number of slices
+	int topSlice = sliceNumber - 1; // Useful for the rotation
 	int sliceWidth = 16; // This will help to set just a square of the spritesheet
 	int sliceHeight = 16; // This too
 
 	int yAxis = 0; // can be replaced by xAxis if the spritesheet is in the horizontal position. 
-
-/* Sprite array
- * For loop with each sprite part being a slice
- * TO DO : the position of said sprite stack */
 
 	for(int i = 0; i < sliceNumber; i++)
 	{
@@ -25,5 +25,11 @@ void Engine::spritestack(Sprite (&slice)[])
 
 		// Now the magic trick to offset the position. We'll try this
 		slice[i].setPosition(slice[i].getPosition().x, (slice[i].getPosition().y - i));
+	}
+
+	// Now We want each slice to have the same rotation as the top one.
+	for(int j = (topSlice - 1); j >= 0 ; j--) // We're starting at the second slice because we want the rotation of the first slice (from top).
+	{
+		slice[j].setRotation(slice[topSlice].getRotation());
 	}
 }
