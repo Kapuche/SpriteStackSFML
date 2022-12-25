@@ -7,6 +7,7 @@
  *** use of a sprite array. Might not be the best. Research to be made. ***
  *** Ready to test. ***/
 /*** devcomm 3 : added a third for loop for the position and the spritestacking ***/
+/*** devcomm 4 : yeeted the third for loop, see the comments below ***/
 
 void Engine::spritestack(Sprite (&slice)[])
 {
@@ -25,6 +26,7 @@ void Engine::spritestack(Sprite (&slice)[])
 		yAxis += sliceHeight;
 		// This is the mistake in the position.
 		// slice[i].setPosition(slice[i].getPosition().x, (slice[i].getPosition().y - i));
+		slice[i].setOrigin(8,8);
 	}
 
 	for(int h = (topSlice - 1); h >= 0 ; h--)
@@ -33,8 +35,9 @@ void Engine::spritestack(Sprite (&slice)[])
 	}
 
 	// Now We want each slice to have the same rotation as the top one.
-	for(int j = (topSlice - 1); j >= 0 ; j--) // We're starting at the second slice because we want the rotation of the first slice (from top).
+	// This for loop should be put in the update function... else it's a bit... Hilarious.
+	/*for(int j = (topSlice - 1); j >= 0 ; j--) // We're starting at the second slice because we want the rotation of the first slice (from top).
 	{
 		slice[j].setRotation(slice[topSlice].getRotation());
-	}
+	}*/
 }
