@@ -6,6 +6,7 @@
 /*** devcomm 2 : 2 for loops implemented, one for texturing and setting the position of the spritestack, the second to get the rotation. ***
  *** use of a sprite array. Might not be the best. Research to be made. ***
  *** Ready to test. ***/
+/*** devcomm 3 : added a third for loop for the position and the spritestacking ***/
 
 void Engine::spritestack(Sprite (&slice)[])
 {
@@ -22,9 +23,13 @@ void Engine::spritestack(Sprite (&slice)[])
 		slice[i].setTexture(m_Texture); // We'll first try by implementing an array of sprite instead of creating a new sprite. It be easier, but less efficient in term of memory usage and performance. To research
 		slice[i].setTextureRect(sf::IntRect(0, yAxis, sliceWidth, sliceHeight)); // Here, part of the magic operate : we're slicing the .png file and get each sprite to have a slice. Now the rest of the magic is to offset the vertical position of each sprites of the array.
 		yAxis += sliceHeight;
+		// This is the mistake in the position.
+		// slice[i].setPosition(slice[i].getPosition().x, (slice[i].getPosition().y - i));
+	}
 
-		// Now the magic trick to offset the position. We'll try this
-		slice[i].setPosition(slice[i].getPosition().x, (slice[i].getPosition().y - i));
+	for(int h = (topSlice - 1); h >= 0 ; h--)
+	{
+		slice[h].setPosition(slice[topSlice].getPosition().x, (slice[topSlice].getPosition().y - h));
 	}
 
 	// Now We want each slice to have the same rotation as the top one.

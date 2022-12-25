@@ -9,4 +9,6 @@ void Engine::update(float dtAsSeconds)
 	dt = m_Clock.restart();
 
 	dtAsSeconds = dt.asSeconds();
+
+	m_MainView.setCenter(m_Sprite[15].getPosition());
 }
