@@ -7,12 +7,12 @@
  *** use of a sprite array. Might not be the best. Research to be made. ***
  *** Ready to test. ***/
 /*** devcomm 3 : added a third for loop for the position and the spritestacking ***/
-/*** devcomm 4 : yeeted the third for loop, see the comments below ***/
+/*** devcomm 4 : yeeted the third "for loop", the rotation is better placed in the update function ***/
 
 void Engine::spritestack(Sprite (&slice)[])
 {
 	m_Texture.loadFromFile("Graphics/Hunter.png"); // Here to use graphics in your depository 
-	int sliceNumber = 16; // Manually putting the number of slices
+	int sliceNumber = 15; // Manually putting the number of slices
 	int topSlice = sliceNumber - 1; // Useful for the rotation
 	int sliceWidth = 16; // This will help to set just a square of the spritesheet
 	int sliceHeight = 16; // This too
@@ -29,15 +29,8 @@ void Engine::spritestack(Sprite (&slice)[])
 		slice[i].setOrigin(8,8);
 	}
 
-	for(int h = (topSlice - 1); h >= 0 ; h--)
+	for(int h = 14, i = 0; h >= 0; h--, i++)
 	{
-		slice[h].setPosition(slice[topSlice].getPosition().x, (slice[topSlice].getPosition().y - h));
+		slice[h].setPosition(slice[topSlice].getPosition().x, (slice[topSlice].getPosition().y + i));
 	}
-
-	// Now We want each slice to have the same rotation as the top one.
-	// This for loop should be put in the update function... else it's a bit... Hilarious.
-	/*for(int j = (topSlice - 1); j >= 0 ; j--) // We're starting at the second slice because we want the rotation of the first slice (from top).
-	{
-		slice[j].setRotation(slice[topSlice].getRotation());
-	}*/
 }
